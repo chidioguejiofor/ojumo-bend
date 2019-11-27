@@ -1,0 +1,39 @@
+{
+  "name": "ojumo-bend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx babel api --out-dir dist",
+    "start": "node dist/index.js",
+    "test": "mocha tests/**/*.test.js --require @babel/register",
+    "dev": "nodemon --exec babel-node api/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chidioguejiofor/ojumo-bend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chidioguejiofor/ojumo-bend/issues"
+  },
+  "homepage": "https://github.com/chidioguejiofor/ojumo-bend#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/register": "^7.7.4",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "sequelize-cli": "^5.5.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^7.14.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.2"
+  }
+}
