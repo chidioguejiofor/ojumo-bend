@@ -1,8 +1,8 @@
 'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('user', {
-    userId: {
+  return sequelize.define('User', {
+    id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
@@ -27,5 +27,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     }
+  }, {
+    tableName: 'users',
+
   });
 }
