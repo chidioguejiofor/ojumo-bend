@@ -1,17 +1,11 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { validationResult } from 'express-validator';
 import { User } from '../../database/models';
 
 
 export default class UserController {
   static async adminLogin(req, res) {
     const { email, password } = req.body;
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
     const user = await User.findOne({ where: { email } });
     if (user) {
       const check = bcrypt.compareSync(password, user.password);
@@ -37,11 +31,6 @@ export default class UserController {
     const {
       name, email, password, isAdmin,
     } = req.body;
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
 
     const saltRound = 10;
     const salt = bcrypt.genSaltSync(saltRound);

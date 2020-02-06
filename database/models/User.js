@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('User', {
+  const User = sequelize.define('User', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -27,8 +27,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     }
-  }, {
-    tableName: 'users',
-
   });
-}
+
+  User.associate = ({Article})=>{
+     User.hasMany(Article, {
+      foreignKey: 'authorId',
+      as: 'userArticles',
+    });
+  };
+  return User;
+
+};
