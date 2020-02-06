@@ -9,7 +9,7 @@
     "pretest": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all",
     "test": "NODE_ENV=test mocha tests/**/*.test.js --require @babel/register,@babel/polyfill --exit",
     "posttest": "NODE_ENV=test sequelize db:migrate:undo:all",
-    "lint": "eslint api --fix",
+    "lint": "eslint api tests --fix",
     "dev": "nodemon --exec babel-node api/index.js"
   },
   "repository": {

@@ -39,4 +39,27 @@ export default class InputValidator {
       body('description', format(NOT_EMPTY_MSG, 'description')).notEmpty(),
     ];
   }
+
+  static addEvent() {
+    return [
+      body('name', format(NOT_EMPTY_MSG, 'name')).notEmpty(),
+      body('speaker', format(NOT_EMPTY_MSG, 'speaker')).notEmpty(),
+      body('eventDateTime', 'should be an ISO Datetime')
+        .notEmpty()
+        .isISO8601()
+        .toDate(),
+    ];
+  }
+
+
+  static rsvp() {
+    return [
+      body('name', format(NOT_EMPTY_MSG, 'name')).notEmpty(),
+      body('speaker', format(NOT_EMPTY_MSG, 'speaker')).notEmpty(),
+      body('eventDateTime', 'should be an ISO Datetime')
+        .notEmpty()
+        .isISO8601()
+        .toDate(),
+    ];
+  }
 }
