@@ -18,4 +18,7 @@ router.post('/admin/signup',
 
 router.post('/articles', TokenValidator.validateTokenMiddleware(true),
   InputValidator.validate('createArticle'), Article.createArticle);
+
+router.get('/articles',
+  Article.getArticles);
 export default router;
