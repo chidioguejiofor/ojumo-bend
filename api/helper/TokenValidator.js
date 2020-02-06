@@ -50,7 +50,6 @@ export default class TokenValidator {
   }
 
   static createToken(tokenData, expiresIn) {
-    console.log('tokenData', tokenData);
     return jwt.sign(tokenData, process.env.SECRET_KEY, {
       expiresIn,
     });
