@@ -1,7 +1,8 @@
 import { Op } from 'sequelize';
 import { format } from 'util';
-import { Event } from '~/database/models';
+import { Event, RSVP } from '~/database/models';
 import { CREATED_MSG, UPDATED_MSG, NON_FOUND_MSG } from '~/api/utils/constants';
+import {User} from "../../database/models";
 
 export default class EventsController {
   static async createUpcomingEvent(req, resp) {
@@ -89,6 +90,43 @@ export default class EventsController {
 
 
   static async rsvpForEvent(req, resp) {
-    return resp.status(501).send('Coming soon...');
+    try{
+      const event = await Event.findOne({
+      where:{
+        id: req.params.eventId,
+      }
+    });
+
+      const body = req.body;
+
+    if(!event){
+      return resp.status(404).json({
+        status:'error',
+        message: format(NON_FOUND_MSG, 'Event')
+      })
+    }
+  const data = {
+        ...body,
+        eventId: event.id,
+      };
+    let [rsvp, isCreated] = await RSVP.findOrCreate({
+      where: {
+        email: body.email,
+        eventId: event.id,
+      },
+      defaults: data,
+    });
+    if(!isCreated){
+      rsvp = await rsvp.update(data)
+    }
+    return resp.status(200).json({
+      status:'success',
+      data: rsvp,
+    });
+    }catch (e) {
+      console.log(e);
+      return resp.json(e)
+    }
+
   }
 }

@@ -1,6 +1,6 @@
 import { format } from 'util';
-import { body, check, validationResult } from 'express-validator';
-import { NOT_EMPTY_MSG } from '~/api/utils/constants';
+import { body, check, validationResult , param} from 'express-validator';
+import { NOT_EMPTY_MSG,NOT_A_VALID_EMAIL } from '~/api/utils/constants';
 
 export default class InputValidator {
   static validate(method) {
@@ -54,12 +54,10 @@ export default class InputValidator {
 
   static rsvp() {
     return [
-      body('name', format(NOT_EMPTY_MSG, 'name')).notEmpty(),
-      body('speaker', format(NOT_EMPTY_MSG, 'speaker')).notEmpty(),
-      body('eventDateTime', 'should be an ISO Datetime')
-        .notEmpty()
-        .isISO8601()
-        .toDate(),
+      body('firstName', format(NOT_EMPTY_MSG, 'firstName')).notEmpty(),
+      body('lastName', format(NOT_EMPTY_MSG, 'lastName')).notEmpty(),
+      body('email',NOT_A_VALID_EMAIL).notEmpty().isEmail(),
+      body('phoneNumber', format(NOT_EMPTY_MSG, 'phoneNumber')).notEmpty(),
     ];
   }
 }

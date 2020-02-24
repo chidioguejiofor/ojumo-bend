@@ -33,7 +33,7 @@ router.put('/events/:eventId', TokenValidator.validateTokenMiddleware(true), Inp
   Events.updateUpcomingEvent);
 router.delete('/events/:eventId', TokenValidator.validateTokenMiddleware(true),
   Events.removeUpcomingEvents);
-router.put('/events/:eventId/rsvp', InputValidator.validate('rsvp'),
+router.post('/events/:eventId/rsvp', InputValidator.validate('rsvp'),
   Events.rsvpForEvent);
 
 export default router;
