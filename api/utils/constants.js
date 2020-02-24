@@ -6,3 +6,4 @@ export const NOT_ALLOWED = 'You are not allowed to access this feature';
 export const INVALID_TOKEN = 'Token must be in the format `Bearer {token}`';
 export const EXPIRED_TOKEN = 'Session expired. Please login again';
 export const NON_FOUND_MSG = 'The %s you tried to access was not found';
+export const NOT_A_VALID_EMAIL = 'Not a valid email field';

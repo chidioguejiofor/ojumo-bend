@@ -5,8 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     speaker: DataTypes.STRING,
     eventDateTime: DataTypes.DATE
   }, {});
-  Events.associate = function(models) {
+  Events.associate = function({RSVP}) {
     // associations can be defined here
+    Events.hasMany(RSVP, {
+      foreignKey: 'eventId',
+      as: 'rsvp',
+    });
   };
   return Events;
 };
