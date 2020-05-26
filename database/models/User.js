@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     name: {
-       allowNull: false,
-       type: DataTypes.STRING
+      allowNull: false,
+      type: DataTypes.STRING
     },
     email: {
       allowNull: false,
@@ -24,17 +24,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     isAdmin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    reset_password_token: {
+      type: DataTypes.STRING
     }
   });
 
-  User.associate = ({Article})=>{
-     User.hasMany(Article, {
+  User.associate = ({ Article }) => {
+    User.hasMany(Article, {
       foreignKey: 'authorId',
-      as: 'userArticles',
+      as: 'userArticles'
     });
   };
   return User;
-
 };
