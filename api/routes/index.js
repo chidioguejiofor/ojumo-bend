@@ -7,33 +7,77 @@ import TokenValidator from '~/api/helper/TokenValidator';
 
 const router = Router();
 
-router.get('/', (req, resp) => resp.status(200).json({
-  message: 'Here we go!!',
-}));
+router.get('/', (req, resp) =>
+  resp.status(200).json({
+    message: 'Here we go!!'
+  })
+);
 
 // Auth
-router.post('/admin/login', InputValidator.validate('adminLogin'), User.adminLogin);
+router.post(
+  '/admin/login',
+  InputValidator.validate('adminLogin'),
+  User.adminLogin
+);
 
 // To aid testing by creating a user to have a hashed password
-router.post('/admin/signup',
-  InputValidator.validate('signup'), User.createUser);
+router.post(
+  '/admin/signup',
+  InputValidator.validate('signup'),
+  User.createUser
+);
 
-router.post('/articles', TokenValidator.validateTokenMiddleware(true),
-  InputValidator.validate('createArticle'), Article.createArticle);
+router.post(
+  '/admin/forgot-password',
+  InputValidator.validate('forgotPassword'),
+  User.forgetPassword
+);
 
-router.get('/articles',
-  Article.getArticles);
+router.get(
+  '/admin/reset-password',
+  InputValidator.validate('validatePassToken'),
+  User.validatePassToken
+);
+
+router.put(
+  '/admin/reset-password',
+  InputValidator.validate('resetPassword'),
+  User.resetPassword
+);
+
+router.post(
+  '/articles',
+  TokenValidator.validateTokenMiddleware(true),
+  InputValidator.validate('createArticle'),
+  Article.createArticle
+);
+
+router.get('/articles', Article.getArticles);
 
 // Events
-router.post('/events', TokenValidator.validateTokenMiddleware(true),
-  InputValidator.validate('addEvent'), Events.createUpcomingEvent);
+router.post(
+  '/events',
+  TokenValidator.validateTokenMiddleware(true),
+  InputValidator.validate('addEvent'),
+  Events.createUpcomingEvent
+);
 
 router.get('/events', Events.getUpcomingEvent);
-router.put('/events/:eventId', TokenValidator.validateTokenMiddleware(true), InputValidator.validate('addEvent'),
-  Events.updateUpcomingEvent);
-router.delete('/events/:eventId', TokenValidator.validateTokenMiddleware(true),
-  Events.removeUpcomingEvents);
-router.post('/events/:eventId/rsvp', InputValidator.validate('rsvp'),
-  Events.rsvpForEvent);
+router.put(
+  '/events/:eventId',
+  TokenValidator.validateTokenMiddleware(true),
+  InputValidator.validate('addEvent'),
+  Events.updateUpcomingEvent
+);
+router.delete(
+  '/events/:eventId',
+  TokenValidator.validateTokenMiddleware(true),
+  Events.removeUpcomingEvents
+);
+router.post(
+  '/events/:eventId/rsvp',
+  InputValidator.validate('rsvp'),
+  Events.rsvpForEvent
+);
 
 export default router;
